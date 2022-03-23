@@ -1,31 +1,55 @@
+@font-face {
+
+    font-family: Joystix;
+    
+    src: url("joystix_monospace.ttf");
+    
+}
+
 * {
     padding: 0;
     margin: 0;
     font-size: 16px;
+    font-family: Joystix;
 }
 
 body {
     display: flex;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
+    background-color: #040404;
 
 }
 
+.title {
+    color: #ffffff;
+    margin-top: 100px;
+    font-size: 50px;
+}
+
+.subtitle {
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
 .board {
-    background-color: #bebebe;
+    background-color: #FFFACF;
     width: 57.5em;
     height: 17.5em;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
+    border: 6px solid #202020;
 }
 
 .dino {
     background: url("assets/dino.png") repeat-x 0px 0px;
     width: 84px;
     height: 84px;
-    position: absolute;
-    bottom: 22px;
+    position: relative;
+    top: 180px;
     left: 42px;
     background-size: 336px 84px;
     background-position-x: 0px;
@@ -33,11 +57,23 @@ body {
 }
 
 .dino-run {
-    animation: dinoRun .25s steps(2) infinite;
+    animation: dinoRun .2s steps(2) infinite;
 }
 
 .dino-jump {
-    animation: dinoJump 1s linear;
+    animation: dinoJump .5s ease-in;
+}
+
+.dino-died {
+    background: url("assets/dino.png") repeat-x 0px 0px;
+    width: 84px;
+    height: 84px; 
+    position: relative;
+    top: 180px;
+    left: 42px;
+    background-size: 336px 84px;
+    background-position-x: -252px;
+    z-index: 10;
 }
 
 @keyframes dinoRun {
@@ -51,11 +87,11 @@ body {
 
 @keyframes dinoJump {
     0%{
-        bottom: 22px;
+        top: 180px;
     }
 
-    45%, 55% {
-        bottom: 150px;
+    30%, 50% {
+        top: 20px;
     }
 }
 
@@ -68,6 +104,103 @@ body {
     }
 }
 
+@keyframes obstaculeMovement {
+    from{
+        left: 1500px;
+    }
+    to {
+        left: -70px;
+    }
+}
+
+@keyframes cloudsMovement {
+    from {
+        left: 950px;
+    } to {
+        left: -70px;
+    }
+}
+
+
+@keyframes cloudsMovement2 {
+    from {
+        left: 1050px;
+    } to {
+        left: -70px;
+    }
+}
+
+
+.obstacule {
+    background: url("assets/cactus1.png") no-repeat;
+    width: 49px;
+    height: 84px;
+    position: relative;
+    top: 95px;
+    left: 1500px;
+    z-index: 5;
+    animation: none;
+}
+ 
+.obstacule-2 {
+    background: url("assets/cactus2.png") no-repeat;
+    width: 100px;
+    height: 66px;
+    position: relative;
+    top: 29px;
+    left: 1500px;
+    z-index: 5;
+    animation: none;
+
+}
+
+.cloud {
+    background: url("assets/nube.png") no-repeat;
+    width: 100px;
+    height: 66px;
+    position: relative;
+    left: 950px;
+    opacity: 60%;
+}
+
+.cloud-2 {
+    background: url("assets/nube.png") no-repeat;
+    width: 100px;
+    height: 66px;
+    position: relative;
+    left: 1050px;
+}
+
+.c1 {
+    top: -150px;
+    animation: none;
+}
+
+.c2 {
+    top: -275px;
+    animation: none;
+}
+
+.c3 {
+    top: -225px;
+    animation: none;
+}
+
+.c4 {
+    top: -325px;
+    animation: none;
+}
+
+.c5 {
+    top: -450px;
+    animation: none;
+}
+
+.c6 {
+    top: -400px;
+    animation: none;
+}
+
 .floor {
     width: 200%;
     height: 42px;
@@ -76,13 +209,13 @@ body {
     bottom: 0;
     left: 0;
     background-size: 50% 42px;
-    animation: floorMovement 2.5s linear infinite;
+    animation: floorMovement 2s linear infinite;
+    animation-play-state: paused;
 }
 
 .score {
     width: 100px;
     height: 30px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 30px;
     position: absolute;
     right: 15px;
@@ -90,4 +223,24 @@ body {
     color: #080808;
     font-weight: bold;
     text-align: right;
+}
+
+.gameover {
+    text-align: center;
+    bottom: 550px;
+    position: relative;
+    font-size: 60px;
+    color: #080808;
+    font-weight: 600;
+    display: none;
+}
+
+.restart-btn {
+    background: url("assets/sprite.png") no-repeat;
+    width: 75px;
+    height: 70px;
+    bottom: 540px;
+    margin: auto;
+    position: relative;
+    display: none;
 }
